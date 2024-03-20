@@ -12,7 +12,7 @@ streamlit_analytics.start_tracking()
 st.title('PNL SENTI SCENARIO LOGIN')
 # st.sidebar.success('Select a page')
 
-PNL = pd.read_csv('D:\\streamlit_input_files\\pnl_scenario_sqlview\\dropcopy_Dealer_PNL_mar_pinpout_scenario_sqlview.csv')
+PNL = pd.read_csv('dropcopy_Dealer_PNL_mar_pinpout_scenario_sqlview.csv')
 teams = PNL['Team'].unique()
 passwords = teams.copy()
 passwords = passwords + '@321'
@@ -90,36 +90,36 @@ user_credentials['DIO'] = 'DINESH@321'
 # }
 
 
-# File to store access log
-log_file_all = "C:\\Users\\Administrator\\Documents\\streamlit_analytics\\pnl_senti_scenario_8000_access_all.log"
-log_file_tabs = "C:\\Users\\Administrator\\Documents\\streamlit_analytics\\pnl_senti_scenario_8000_access_tabs.log"
+# # File to store access log
+# log_file_all = "C:\\Users\\Administrator\\Documents\\streamlit_analytics\\pnl_senti_scenario_8000_access_all.log"
+# log_file_tabs = "C:\\Users\\Administrator\\Documents\\streamlit_analytics\\pnl_senti_scenario_8000_access_tabs.log"
 
 
-# Function to log access
-def log_access_all(ip_address, my_input):
-    with open(log_file_all, "a") as f:
-        timestamp = datetime.datetime.now()
-        f.write(f"Timestamp: {timestamp}, IP Address: {ip_address}, USER ID: {my_input}\n")
+# # Function to log access
+# def log_access_all(ip_address, my_input):
+#     with open(log_file_all, "a") as f:
+#         timestamp = datetime.datetime.now()
+#         f.write(f"Timestamp: {timestamp}, IP Address: {ip_address}, USER ID: {my_input}\n")
 
-def log_access_tabs(ip_address, my_input):
-    with open(log_file_tabs, "a") as f:
-        timestamp = datetime.datetime.now()
-        f.write(f"Timestamp: {timestamp}, IP Address: {ip_address}, USER ID: {my_input}\n")
+# def log_access_tabs(ip_address, my_input):
+#     with open(log_file_tabs, "a") as f:
+#         timestamp = datetime.datetime.now()
+#         f.write(f"Timestamp: {timestamp}, IP Address: {ip_address}, USER ID: {my_input}\n")
 
-def get_remote_ip() -> str:
-    """Get remote ip."""
-    try:
-        ctx = get_script_run_ctx()
-        if ctx is None:
-            return None
+# def get_remote_ip() -> str:
+#     """Get remote ip."""
+#     try:
+#         ctx = get_script_run_ctx()
+#         if ctx is None:
+#             return None
 
-        session_info = runtime.get_instance().get_client(ctx.session_id)
-        if session_info is None:
-            return None
-    except Exception as e:
-        return None
+#         session_info = runtime.get_instance().get_client(ctx.session_id)
+#         if session_info is None:
+#             return None
+#     except Exception as e:
+#         return None
 
-    return session_info.request.remote_ip
+#     return session_info.request.remote_ip
 
 if "my_input" not in st.session_state:
     st.session_state["my_input"] = ""
@@ -135,19 +135,17 @@ my_input = username
 
 login = st.button('Login')
 
-log_access_tabs(get_remote_ip(), my_input)
+# log_access_tabs(get_remote_ip(), my_input)
 
 if login:
     if username in user_credentials and user_credentials[username] == password:
         st.success("Login successful!")
         st.markdown('<span style="color: blue;">Click on home in side menu to see the data</span>', unsafe_allow_html=True)
         st.session_state["my_input"] = my_input
-        log_access_all(get_remote_ip(), my_input)
+        # log_access_all(get_remote_ip(), my_input)
         # st.write("You have entered: ", my_input)
 
     else:
         st.error("Invalid credentials. Please try again.")
 
 streamlit_analytics.stop_tracking()
-
-

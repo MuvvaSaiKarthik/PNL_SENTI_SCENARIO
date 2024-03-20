@@ -110,7 +110,7 @@ try:
                     # Update time_display placeholder
                     time_display_pnl.write(f'CT {current_time}   |   PNL Time {data_fetch_time}', format='md')
 
-                    
+
                     if pnl is not None:
 
                         if st.session_state['my_input'] == 'JAI':
@@ -145,7 +145,7 @@ try:
                                         'PL_U0.5D0.5', 'PinPout', 'Actual', 'ExpOptVal', 'With_Exch']].groupby(
                             by=['Team']).sum().reset_index()
 
-                        
+
                         # total PNL(sum)
                         total_pnl = pnl_team.select_dtypes(include=['number']).sum().reset_index()
 
@@ -315,7 +315,7 @@ try:
                              'Senti_FOI', 'Senti_MFI', 'Senti_MOI', 'Senti_NFI',
                              'Senti_NOI', 'Type', 'ClientCode']]
 
-                        
+
                         senti.reset_index(inplace=True)
                         del senti['index']
 
@@ -484,7 +484,7 @@ try:
                              'SentiQty_FOI', 'SentiQty_MFI', 'SentiQty_MOI', 'SentiQty_NFI',
                              'SentiQty_NOI', 'Type', 'ClientCode']]
 
-                        
+
                         senti = pd.read_csv('Senti.csv')
                         # Read quantity_fetch_time.csv
                         # time_frame = senti['DT'].iloc[0]
@@ -613,7 +613,7 @@ try:
                                                 'Senti_NFI': 'SentiQty_NFI', 'Senti_NOI': 'SentiQty_NOI'},
                                        inplace=True)
 
-                        
+
                         senti_qty.reset_index(inplace=True)
                         del senti_qty['index']
 
@@ -805,7 +805,7 @@ try:
                     time_display_net_position.write(f'CT {current_time}   |   NET POSITION time {fetch_time}',
                                                     format='md')
 
-                    
+
                     net_position['CFQty'] = net_position['Qty_Today'] + net_position['Qty_pvs']
 
                     net_position = \

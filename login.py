@@ -7,7 +7,6 @@ from streamlit.runtime.scriptrunner import get_script_run_ctx
 import datetime
 
 st.set_page_config(layout='wide')
-streamlit_analytics.start_tracking()
 
 st.title('PNL SENTI SCENARIO LOGIN')
 # st.sidebar.success('Select a page')
@@ -147,5 +146,3 @@ if login:
 
     else:
         st.error("Invalid credentials. Please try again.")
-
-streamlit_analytics.stop_tracking()

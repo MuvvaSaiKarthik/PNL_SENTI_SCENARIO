@@ -2,7 +2,6 @@ import streamlit as st
 import datetime
 import pandas as pd
 import time
-# from streamlit_option_menu import option_menu
 
 import streamlit_option_menu as som
 

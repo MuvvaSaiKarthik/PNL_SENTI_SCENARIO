@@ -2,7 +2,9 @@ import streamlit as st
 import datetime
 import pandas as pd
 import time
-from streamlit_option_menu import option_menu
+# from streamlit_option_menu import option_menu
+
+import streamlit_option_menu as som
 
 import mysql.connector
 import streamlit_analytics
@@ -76,7 +78,7 @@ try:
             # st.experimental_rerun()
             exit(0)
 
-        selected = option_menu(
+        selected = som.option_menu(
             menu_title=None,
             options=['PNL', 'SENTI', 'SENTI QUANTITY', 'SCENARIO', 'NET POSITION'],
             default_index=0,  # default selected navigation

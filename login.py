@@ -5,7 +5,6 @@ import pandas as pd
 from streamlit import runtime
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 import datetime
-import streamlit_option_menu as som
 
 st.set_page_config(layout='wide')
 

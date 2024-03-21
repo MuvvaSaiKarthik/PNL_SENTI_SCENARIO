@@ -5,9 +5,6 @@ import time
 
 import streamlit_option_menu as som
 
-import mysql.connector
-import streamlit_analytics
-
 st.set_page_config(layout='wide')
 
 def fetch_data_PNL():

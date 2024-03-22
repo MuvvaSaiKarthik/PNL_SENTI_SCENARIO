@@ -105,8 +105,10 @@ try:
                     time_diff_min = time_difference_in_minutes(current_time_dt, data_fetch_time)
                     time_diff_min = abs(time_diff_min)
 
+                    page_updates = datetime.datetime.now().strftime('%S')
+
                     # Update time_display placeholder
-                    time_display_pnl.write(f'CT {current_time}   |   PNL Time {data_fetch_time}', format='md')
+                    time_display_pnl.write(f'Latest {page_updates}   |   PNL Time {data_fetch_time}', format='md')
 
 
                     if pnl is not None:
@@ -240,8 +242,10 @@ try:
                     time_diff_min = time_difference_in_minutes(current_time_dt, time_frame)
                     time_diff_min = abs(time_diff_min)
 
+                    page_updates = datetime.datetime.now().strftime('%S')
+
                     # Update time_display placeholder
-                    time_display_senti.write(f'CT {current_time}   |   SENTI Time {time_frame}', format='md')
+                    time_display_senti.write(f'Latest {page_updates}   |   SENTI Time {time_frame}', format='md')
 
                     if st.session_state['my_input'] == 'JAI':
                         senti = senti.loc[senti['Team'].isin(['JAI', 'JAS', 'JPT'])]
@@ -409,8 +413,10 @@ try:
                     time_diff_min = time_difference_in_minutes(current_time_dt, time_frame)
                     time_diff_min = abs(time_diff_min)
 
+                    page_updates = datetime.datetime.now().strftime('%S')
+
                     # Update time_display placeholder
-                    time_display_senti_qty.write(f'CT {current_time}   |  SENTI QTY Time {time_frame}', format='md')
+                    time_display_senti_qty.write(f'Latest {page_updates}   |  SENTI QTY Time {time_frame}', format='md')
 
                     if st.session_state['my_input'] == 'JAI':
                         senti_qty = senti_qty.loc[senti_qty['Team'].isin(['JAI', 'JAS', 'JPT'])]
@@ -658,8 +664,10 @@ try:
                     time_diff_min = time_difference_in_minutes(current_time_dt, fetch_time)
                     time_diff_min = abs(time_diff_min)
 
+                    page_updates = datetime.datetime.now().strftime('%S')
+
                     # Update time_display placeholder
-                    time_display_scenario.write(f'CT {current_time}   |   SCENARIO Time {fetch_time}',
+                    time_display_scenario.write(f'Latest {page_updates}   |   SCENARIO Time {fetch_time}',
                                                 format='md')
 
 
@@ -799,8 +807,10 @@ try:
                     time_diff_min = time_difference_in_minutes(current_time_dt, fetch_time)
                     time_diff_min = abs(time_diff_min)
 
+                    page_updates = datetime.datetime.now().strftime('%S')
+
                     # Update time_display placeholder
-                    time_display_net_position.write(f'CT {current_time}   |   NET POSITION time {fetch_time}',
+                    time_display_net_position.write(f'Latest {page_updates}   |   NET POSITION time {fetch_time}',
                                                     format='md')
 
 

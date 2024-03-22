@@ -2,8 +2,8 @@
 import streamlit as st
 import pandas as pd
 # import streamlit_analytics
-from streamlit import runtime
-from streamlit.runtime.scriptrunner import get_script_run_ctx
+# from streamlit import runtime
+# from streamlit.runtime.scriptrunner import get_script_run_ctx
 import datetime
 
 st.set_page_config(layout='wide')

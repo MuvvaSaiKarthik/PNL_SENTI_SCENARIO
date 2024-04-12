@@ -78,14 +78,14 @@ try:
 
         selected = som.option_menu(
             menu_title=None,
-            options=['PNL', 'SENTI', 'SENTI QUANTITY', 'SCENARIO', 'NET POSITION'],
+            options=['PNL', 'SENTI', 'SENTI QUANTITY', 'SCENARIO', 'NET POSITION', 'EQ POS'],
             default_index=0,  # default selected navigation
             orientation='horizontal'
         )
 
         if selected == 'PNL':
             st.title("PNL DASHBOARD")
-
+    
             # Create placeholders for dynamic data
             time_display_pnl = st.empty()
             time_delay_alert = st.empty()

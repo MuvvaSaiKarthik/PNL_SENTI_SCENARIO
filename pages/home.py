@@ -62,6 +62,8 @@ def time_difference_in_minutes(dt1, dt2):
     timedelta = dt2 - dt1
     return (timedelta.total_seconds() // 60)
 
+today = datetime.datetime.today().date().strftime('%d%b%Y')
+
 try:
     if st.session_state["my_input"]:
 
@@ -888,6 +890,97 @@ try:
                 # Sleep for 3 seconds before the next update
                 time.sleep(3)
 
+        if selected == 'EQ POS':
+            st.title('Negative EQ POS')
+
+            # Create placeholders for dynamic content
+            time_display_eq_position = st.empty()
+            time_delay_alert = st.empty()
+            total_dataframe_placeholder_eq_position = st.empty()
+            eq_position_team_placeholder = st.empty()
+            eq_position_dataframe_placeholder = st.empty()
+            filtered_dataframe_placeholder_eq_position = st.empty()
+
+            while True:
+                try:
+                    current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+                    # Fetch data
+                    complete_df = pd.read_csv(f'negative_cm_cfqty_{today}.csv')
+
+                    time_frame = complete_df['NSE_time'].iloc[0]
+                    nse_time = complete_df['NSE_time'].iloc[0]
+                    bse_time = complete_df['BSE_time'].iloc[0]
+                    nse_date = complete_df['NSE_date'].iloc[0]
+                    bse_date = complete_df['BSE_date'].iloc[0]
+                    yest_date = complete_df['Yest_date'].iloc[0]
+
+                    complete_df = complete_df[['Client Code', 'Name', 'Scrip', 'Y_CFQty', 'T_CFQty', 'EQ_Pos']]
+                    complete_df['Team'] = complete_df['Name'].apply(lambda x: x.split(':')[-2])
+                    complete_df = complete_df[['Team', 'Client Code', 'Name', 'Scrip', 'Y_CFQty', 'T_CFQty', 'EQ_Pos']]
+
+                    time_frame = pd.to_datetime(time_frame)
+                    current_time_dt = pd.to_datetime(current_time)
+                    time_diff_min = time_difference_in_minutes(current_time_dt, time_frame)
+                    time_diff_min = abs(time_diff_min)
+
+                    # Update time_display placeholder
+                    time_display_eq_position.write(
+                        f'CT {current_time} | NSE time {nse_time} | BSE time {bse_time} | NSE date {nse_date} | BSE date {bse_date} | Yest date {yest_date}',
+                        format='md')
+
+                    if st.session_state['my_input'] == 'JAI':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['JAI', 'JAS', 'JPT'])]
+
+                    elif st.session_state['my_input'] == 'VEO':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['VEO', 'VEC', 'VSS'])]
+
+                    elif st.session_state['my_input'] == 'HEO':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['HEO', 'HEC'])]
+
+                    elif st.session_state['my_input'] == 'HDO':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['HDO', 'HDC'])]
+
+                    elif st.session_state['my_input'] == 'GQO':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['GQO', 'GQC', 'GQS'])]
+
+                    elif st.session_state['my_input'] == 'KKD':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['KKC', 'KKD'])]
+
+                    elif st.session_state['my_input'] == 'NAI':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['NAF', 'NAI', 'NAS'])]
+
+                    elif st.session_state['my_input'] == 'SIO':
+                        complete_df = complete_df.loc[complete_df['Team'].isin(['SIA', 'SIC', 'SIO'])]
+
+                    else:
+                        complete_df = complete_df.loc[complete_df['Team'].isin([st.session_state["my_input"]])]
+
+                    # if time_diff_min > 3:
+                    #     time_delay_alert.markdown('<span style="color: red">Data delay greater than 2 minutes!</span>',
+                    #                               unsafe_allow_html=True)
+                        # data_delay_df = pd.read_csv('D:\\Data_Delay_Alert\\Data_Delay_Alert.csv')
+                        # data_delay_df['DC_PS_SENTI'].iloc[0] = 'Data delay'
+                        # data_delay_df.to_csv('D:\\Data_Delay_Alert\\Data_Delay_Alert.csv', index=False)
+
+                    # else:
+                    #     time_delay_alert.write("")
+                        # data_delay_df = pd.read_csv('D:\\Data_Delay_Alert\\Data_Delay_Alert.csv')
+                        # data_delay_df['DC_PS_SENTI'].iloc[0] = 'No data delay'
+                        # data_delay_df.to_csv('D:\\Data_Delay_Alert\\Data_Delay_Alert.csv', index=False)
+
+                    # update placeholders
+                    # summary_placeholder.dataframe(summary_df, width=5000)
+                    filtered_dataframe_placeholder_eq_position.dataframe(complete_df, width=5000)
+
+                    # Sleep for 3 seconds before the next update
+                    time.sleep(3)
+
+                except Exception as e:
+                    print('Issue:', e)
+                    time.sleep(1)
+                    pass
+
 except KeyError:
     # Handle the KeyError when the key is not found in session state
     st.error('User not Logged in')
@@ -900,5 +993,4 @@ except Exception as e:
     st.write(e)
     time.sleep(1)
     pass
-
 
